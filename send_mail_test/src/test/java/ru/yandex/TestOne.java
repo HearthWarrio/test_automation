@@ -26,7 +26,7 @@ public class TestOne {
         driver.manage().window().maximize();
 
         driver.get("https://passport.yandex.ru/auth/list?origin=home_desktop_ru&retpath=https%3A%2F%2Fmail.yandex.ru%2F&backpath=https%3A%2F%2Fyandex.ru");
-
+// @Before - аннотации обычно используются для подготовки окружения/данных для тестов, поэтому ассерты в них не делают
         String title = driver.getTitle();
 
         Assert.assertTrue(title.equals("Авторизация"));
@@ -38,7 +38,7 @@ public class TestOne {
         loginPage.inputLogin(ConfigureProperties.getProperty("login"));
 
         loginPage.clickLoginButton();
-
+// вот это тоже будет относится к подготовке окружения, в тесте это не нужно
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         loginPage.inputPassword(ConfigureProperties.getProperty("password"));
