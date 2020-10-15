@@ -1,5 +1,7 @@
 package ru.yandex;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UserPage {
+    public final Logger logger = LogManager.getLogger(UserPage.class);
     public WebDriver driver;
     public UserPage(WebDriver driver){
 
@@ -25,7 +28,9 @@ public class UserPage {
 
         public void makeMail() {
 
+            logger.info("Переход в черновики");
             addMail.click();
+
 
         }
 
@@ -35,6 +40,7 @@ public class UserPage {
 
         public void addTemplate(){
 
+            logger.info("Откно формирования шаблона открыто");
             createTemplate.click();
 
         }
@@ -47,7 +53,9 @@ public class UserPage {
 
     public void inputAdress(String adress){
 
-            adressField.sendKeys(adress);
+
+        logger.info("Ввод адресата");
+        adressField.sendKeys(adress);
 
         }
 
@@ -57,6 +65,8 @@ public class UserPage {
         public void inputSubject(String subject){
 
             subjectName.sendKeys(subject);
+            logger.info("Ввод темы");
+
         }
 
     @FindBy(xpath = "//*[@id=\"cke_53_contents\"]/div")
@@ -64,6 +74,7 @@ public class UserPage {
 
         public void inputText(String text){
 
+            logger.info("Ввод текста");
             mailText.sendKeys(text);
 
         }
@@ -73,6 +84,7 @@ public class UserPage {
 
         public void clickSendMail(){
 
+            logger.info("Посылка письма");
             sendMail.click();
 
         }
@@ -82,6 +94,7 @@ public class UserPage {
 
         public void clickFrustratingWindow(){
 
+            logger.info("Закрытия неприятного, мерзкого окна");
             frustratingWindow.click();
 
         }
@@ -91,31 +104,60 @@ public class UserPage {
 
         public void clickRecentTemplate() {
 
+            logger.info("Открытие созданного черновика");
             recentTemplate.click();
 
         }
 
        public String getAdress() {
 
-            String adressName = adressField.getText();
+            String adressName = null;
 
-            return adressName;
+             if (adressName.equals(adressField.getText())) {
+
+                 logger.info("Адресат верен");
+                 return adressField.getText();
+
+             } else {
+
+                 logger.error("Адресат неверен" );
+                 return adressName;
+             }
 
        }
 
        public String getSubject() {
 
-            String subjectText = subjectName.getText();
+           String subjectText = null;
 
-            return subjectText;
+            if (subjectText.equals(subjectName.getText())) {
+
+                logger.info("Тема письма верна");
+                return subjectName.getText();
+
+           } else {
+
+                logger.error("Тема письма не верна");
+                return subjectText;
+            }
 
        }
 
        public  String getMailText() {
 
-            String mailWords = mailText.getText();
+            String mailWords = null;
 
-            return mailWords;
+             if (mailWords.equals(mailText.getText())) {
+
+                 logger.info("Текст письма верен");
+                 return mailText.getText();
+
+             } else {
+
+                 logger.error("Текст письма не верен");
+                 return mailWords;
+
+             }
 
        }
 
@@ -123,6 +165,8 @@ public class UserPage {
     private WebElement logoutButtton;
 
         public String getUserName() {
+
+            logger.info("Чекаем юзернейм");
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
@@ -136,11 +180,15 @@ public class UserPage {
 
         public void entryMenu() {
 
+            logger.info("Нажимаем на меню входа");
+
         userMenu.click();
 
         }
 
         public void userLogout() {
+
+            logger.info("Выходим");
 
         logoutButtton.click();
 
