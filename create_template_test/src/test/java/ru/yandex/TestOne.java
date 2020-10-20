@@ -1,5 +1,4 @@
 package ru.yandex;
-
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,7 +12,7 @@ public class TestOne {
     public static WebDriver driver;
 
     @BeforeClass
-    public static void settings(){
+    public void settings(){
 
         System.setProperty("webdriver.chrome.driver", "/autotest/driver/chromedriver.exe");
 
@@ -49,6 +48,11 @@ public class TestOne {
 
         Assert.assertEquals(ConfigureProperties.getProperty("login"), user);
 
+    }
+
+    @Test
+    public void test1() {
+
         userPage.makeMail();
 
         userPage.addTemplate();
@@ -59,13 +63,38 @@ public class TestOne {
 
         userPage.inputText(ConfigureProperties.getProperty("text"));
 
+    }
+
+    @Test
+    public void test2() {
+
         userPage.clickSendMail();
+
+    }
+
+    @Test
+    public void test3() {
 
         userPage.clickFrustratingWindow();
 
+    }
+
+    @Test
+    public void test4() {
+
         userPage.makeMail();
 
+    }
+
+    @Test
+    public void test5() {
+
         userPage.clickRecentTemplate();
+
+    }
+
+    @Test
+    public void test6() {
 
         String adress = userPage.getAdress();
 
