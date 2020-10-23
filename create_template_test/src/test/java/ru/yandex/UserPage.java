@@ -20,11 +20,11 @@ public class UserPage {
 
         this.driver = driver;
     }
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[5]/div/div[2]/div/div/header/div/div[5]/div[2]/a[1]/div/img")
+    @FindBy(xpath = "//*[contains(@class 'user-pic_image')]")
     private WebElement userMenu;
 
     // папка черновики
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[5]/div/div[3]/div[2]/div[3]/div/div[1]/div[1]/a[5]/span")
+    @FindBy(xpath = "//a[text()='Черновики']")
     private WebElement addMail;
 
         @Step("Переход в черновики")
@@ -48,10 +48,7 @@ public class UserPage {
 
         }
 
-    //Для этого и подобного решения, мой комментарий: я прочитал о том, что не рекомендуется использовать прямые ссылки
-    //по xpath. но, к сожалению, я не везде смог найти id/class/title. Поэтому, там, где их не нашел и использую
-    //полные ссылки.
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[9]/div/div[1]/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div/div/div/div")
+    @FindBy(xpath = "//*[contains(@class 'MultipleAddressesDesktop-Field ComposeYabblesField')]")
     private WebElement adressField;
 
         @Step("Ввод адресата")
@@ -63,7 +60,7 @@ public class UserPage {
 
         }
 
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[9]/div/div[1]/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div[1]/div/div[3]/form/div/div/input")
+    @FindBy(xpath = "//*[contains(@class 'composeTextField ComposeSubject-TextField')]")
     private WebElement subjectName;
 
         @Step("Ввод темы черновика")
@@ -74,7 +71,7 @@ public class UserPage {
 
         }
 
-    @FindBy(xpath = "//*[@id=\"cke_53_contents\"]/div")
+    @FindBy(xpath = "//div[contains(@class, 'cke_contents cke_reset')]/child::div[text()='Напишите что-нибудь')]")
     private WebElement mailText;
 
         @Step("Ввод текста черновика")
@@ -85,7 +82,7 @@ public class UserPage {
 
         }
 
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[9]/div/div[1]/div/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[1]/button")
+    @FindBy(xpath = "//button[contains(@class, 'control button2 button2_view_default button2_tone_default button2_size_l button2_theme_action button2_pin_circle-circle ComposeControlPanelButton-Button ComposeControlPanelButton-Button_action')]/descendant::span[text()='Отправить')]")
     private WebElement sendMail;
 
         @Step("Нажать создания шаблона")
@@ -96,7 +93,7 @@ public class UserPage {
 
         }
 
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[9]/div/div[1]/div[2]/a")
+    @FindBy(xpath = "//div[contains(@class, 'ComposeDoneScreen-Actions')]/descendant::a[text()='Вернуться во Входящие')]")
     private WebElement frustratingWindow;
 
         @Step("Закрыть всплывающее окно")
@@ -107,7 +104,7 @@ public class UserPage {
 
         }
 
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[5]/div/div[3]/div[3]/div[2]/div[5]/div[1]/div/div/div[2]/div/div[1]/div/div/div/a/div/span[2]")
+    @FindBy(xpath = "//div[contains(@class, 'mail-MessageSnippet-Item mail-MessageSnippet-Item_firstline js-message-snippet-firstline)]")
     private WebElement recentTemplate;
 
         @Step("Открыть созданный черновик")
@@ -173,7 +170,7 @@ public class UserPage {
 
        }
 
-    @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[5]/div/div[2]/div/div/header/div/div[5]/div[2]/div/ul/ul/li[5]/a")
+    @FindBy(xpath = "//a[text()=’Выйти из сервисов Яндекса’]")
     private WebElement logoutButtton;
 
         @Step("Проверка имени пользователя")
@@ -183,7 +180,7 @@ public class UserPage {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"nb-1\"]/body/div[2]/div[5]/div/div[2]/div/div/header/div/div[5]/div[2]/a[1]/span[1]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class 'yandex-header_content')]")));
 
         String userName = userMenu.getText();
 
@@ -210,4 +207,5 @@ public class UserPage {
         }
 
     }
+
 
