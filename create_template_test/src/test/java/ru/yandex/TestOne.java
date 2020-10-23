@@ -32,7 +32,7 @@ public class TestOne {
     }
 
     @Test
-    public void test() {
+    public void test0() {
 
         loginPage.inputLogin(ConfigureProperties.getProperty("login"));
 
