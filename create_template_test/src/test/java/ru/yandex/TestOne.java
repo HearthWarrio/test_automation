@@ -54,55 +54,83 @@ public class TestOne {
     public void test1() {
 
         userPage.makeMail();
-
+    }
+    
+    @Test
+            public void test2() {
         userPage.addTemplate();
+
+    }
+    
+    @Test
+    public void test3() {
 
         userPage.inputAdress(ConfigureProperties.getProperty("adress"));
 
+    }
+    
+    @Test
+    public void test4() {
+
         userPage.inputSubject(ConfigureProperties.getProperty("subject"));
+
+    }
+    
+    @Test
+    public void test5() {        
 
         userPage.inputText(ConfigureProperties.getProperty("text"));
 
     }
 
     @Test
-    public void test2() {
+    public void test6() {
 
         userPage.clickSendMail();
 
     }
 
     @Test
-    public void test3() {
+    public void test7() {
 
         userPage.clickFrustratingWindow();
 
     }
 
     @Test
-    public void test4() {
+    public void test8() {
 
         userPage.makeMail();
 
     }
 
     @Test
-    public void test5() {
+    public void test9() {
 
         userPage.clickRecentTemplate();
 
     }
 
     @Test
-    public void test6() {
+    public void test10() {
 
         String adress = userPage.getAdress();
 
         Assert.assertEquals(ConfigureProperties.getProperty("adress"), adress);
 
+    }
+    
+    @Test
+    public void test11() {
+
         String subject = userPage.getSubject();
 
         Assert.assertEquals(ConfigureProperties.getProperty("subject"), subject);
+
+    }
+    
+    @Test
+    public void test12() {        
 
         String text = userPage.getMailText();
 
