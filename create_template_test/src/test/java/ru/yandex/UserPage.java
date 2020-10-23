@@ -1,5 +1,6 @@
 package ru.yandex;
 
+import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -26,6 +27,7 @@ public class UserPage {
     @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[5]/div/div[3]/div[2]/div[3]/div/div[1]/div[1]/a[5]/span")
     private WebElement addMail;
 
+        @Step("Переход в черновики")
         public void makeMail() {
 
             logger.info("Переход в черновики");
@@ -38,6 +40,7 @@ public class UserPage {
      @FindBy(xpath = "//*[contains(@text 'Создать шаблон')]")
      private WebElement createTemplate;
 
+        @Step("Открыть создание шаблона")
         public void addTemplate(){
 
             logger.info("Откно формирования шаблона открыто");
@@ -51,17 +54,19 @@ public class UserPage {
     @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[9]/div/div[1]/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div[1]/div/div[1]/div/div/div/div")
     private WebElement adressField;
 
-    public void inputAdress(String adress){
+        @Step("Ввод адресата")
+        public void inputAdress(String adress){
 
 
-        logger.info("Ввод адресата");
-        adressField.sendKeys(adress);
+            logger.info("Ввод адресата");
+            adressField.sendKeys(adress);
 
         }
 
     @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[9]/div/div[1]/div/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div[1]/div/div[3]/form/div/div/input")
     private WebElement subjectName;
 
+        @Step("Ввод темы черновика")
         public void inputSubject(String subject){
 
             subjectName.sendKeys(subject);
@@ -72,6 +77,7 @@ public class UserPage {
     @FindBy(xpath = "//*[@id=\"cke_53_contents\"]/div")
     private WebElement mailText;
 
+        @Step("Ввод текста черновика")
         public void inputText(String text){
 
             logger.info("Ввод текста");
@@ -82,6 +88,7 @@ public class UserPage {
     @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[9]/div/div[1]/div/div[2]/div/div[1]/div[2]/div[2]/div/div[1]/div[1]/button")
     private WebElement sendMail;
 
+        @Step("Нажать создания шаблона")
         public void clickSendMail(){
 
             logger.info("Посылка письма");
@@ -92,9 +99,10 @@ public class UserPage {
     @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[9]/div/div[1]/div[2]/a")
     private WebElement frustratingWindow;
 
+        @Step("Закрыть всплывающее окно")
         public void clickFrustratingWindow(){
 
-            logger.info("Закрытия неприятного, мерзкого окна");
+            logger.info("Закрыть всплывающее окно");
             frustratingWindow.click();
 
         }
@@ -102,13 +110,15 @@ public class UserPage {
     @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[5]/div/div[3]/div[3]/div[2]/div[5]/div[1]/div/div/div[2]/div/div[1]/div/div/div/a/div/span[2]")
     private WebElement recentTemplate;
 
+        @Step("Открыть созданный черновик")
         public void clickRecentTemplate() {
 
-            logger.info("Открытие созданного черновика");
+            logger.info("Открыть созданный черновик");
             recentTemplate.click();
 
         }
 
+       @Step("Проверка корректности адресата")
        public String getAdress() {
 
             String adressName = null;
@@ -126,6 +136,7 @@ public class UserPage {
 
        }
 
+       @Step("Проверка корректности темы черновика")
        public String getSubject() {
 
            String subjectText = null;
@@ -143,6 +154,7 @@ public class UserPage {
 
        }
 
+       @Step("Проверка корректности текста письма")
        public  String getMailText() {
 
             String mailWords = null;
@@ -164,6 +176,7 @@ public class UserPage {
     @FindBy(xpath = "//*[@id=\"nb-1\"]/body/div[2]/div[5]/div/div[2]/div/div/header/div/div[5]/div[2]/div/ul/ul/li[5]/a")
     private WebElement logoutButtton;
 
+        @Step("Проверка имени пользователя")
         public String getUserName() {
 
             logger.info("Чекаем юзернейм");
@@ -178,17 +191,19 @@ public class UserPage {
 
         }
 
+        @Step("Нажатие на меню входа-выхода")
         public void entryMenu() {
 
-            logger.info("Нажимаем на меню входа");
+            logger.info("Нажимаем на меню входа-выхода");
 
         userMenu.click();
 
         }
 
+        @Step("Выход")
         public void userLogout() {
 
-            logger.info("Выходим");
+            logger.info("Выход");
 
         logoutButtton.click();
 
