@@ -11,6 +11,15 @@
                 <OnStartupTriggeringPolicy/>
             </Policies>
         </RollingFile>
+        <JDBC name="df1k7i5jhsorf5" tableName="TEST_LOGS">
+            <ConnectionFactory class="ec2-52-87-135-240.compute-1.amazonaws.com:5432" method="getDatabaseConnection" />
+            <Column name="LOG_ID" pattern="%u" />
+            <Column name="EVENT_DATE" isEventTimestamp="true" />
+            <Column name="LEVEL" pattern="%level" />
+            <Column name="LOGGER" pattern="%logger" />
+            <Column name="MESSAGE" pattern="%message" />
+            <Column name="EXCEPTION" pattern="%throwable " />
+        </JDBC>
     </Appenders>
     <Loggers>
 
