@@ -27,156 +27,156 @@ public class UserPage {
     @FindBy(xpath = "//a[text()='Черновики']")
     private WebElement addMail;
 
-        @Step("Переход в черновики")
-        public void makeMail() {
+    @Step("Переход в черновики")
+    public void makeMail() {
 
-            logger.info("Переход в черновики");
-            addMail.click();
+        logger.info("Переход в черновики");
+        addMail.click();
 
 
-        }
+    }
 
     // сделать шаблон (октрыть окно)
-     @FindBy(xpath = "//*[contains(@text 'Создать шаблон')]")
-     private WebElement createTemplate;
+    @FindBy(xpath = "//*[contains(@text 'Создать шаблон')]")
+    private WebElement createTemplate;
 
-        @Step("Открыть создание шаблона")
-        public void addTemplate(){
+    @Step("Открыть создание шаблона")
+    public void addTemplate(){
 
-            logger.info("Откно формирования шаблона открыто");
-            createTemplate.click();
+        logger.info("Откно формирования шаблона открыто");
+        createTemplate.click();
 
-        }
+    }
 
     @FindBy(xpath = "//*[contains(@class 'MultipleAddressesDesktop-Field ComposeYabblesField')]")
     private WebElement adressField;
 
-        @Step("Ввод адресата")
-        public void inputAdress(String adress){
+    @Step("Ввод адресата")
+    public void inputAdress(String adress){
 
 
-            logger.info("Ввод адресата");
-            adressField.sendKeys(adress);
+        logger.info("Ввод адресата");
+        adressField.sendKeys(adress);
 
-        }
+    }
 
     @FindBy(xpath = "//*[contains(@class 'composeTextField ComposeSubject-TextField')]")
     private WebElement subjectName;
 
-        @Step("Ввод темы черновика")
-        public void inputSubject(String subject){
+    @Step("Ввод темы черновика")
+    public void inputSubject(String subject){
 
-            subjectName.sendKeys(subject);
-            logger.info("Ввод темы");
+        subjectName.sendKeys(subject);
+        logger.info("Ввод темы");
 
-        }
+    }
 
     @FindBy(xpath = "//div[contains(@class, 'cke_contents cke_reset')]/child::div[text()='Напишите что-нибудь')]")
     private WebElement mailText;
 
-        @Step("Ввод текста черновика")
-        public void inputText(String text){
+    @Step("Ввод текста черновика")
+    public void inputText(String text){
 
-            logger.info("Ввод текста");
-            mailText.sendKeys(text);
+        logger.info("Ввод текста");
+        mailText.sendKeys(text);
 
-        }
+    }
 
     @FindBy(xpath = "//button[contains(@class, 'control button2 button2_view_default button2_tone_default button2_size_l button2_theme_action button2_pin_circle-circle ComposeControlPanelButton-Button ComposeControlPanelButton-Button_action')]/descendant::span[text()='Отправить')]")
     private WebElement sendMail;
 
-        @Step("Нажать создания шаблона")
-        public void clickSendMail(){
+    @Step("Нажать создания шаблона")
+    public void clickSendMail(){
 
-            logger.info("Посылка письма");
-            sendMail.click();
+        logger.info("Посылка письма");
+        sendMail.click();
 
-        }
+    }
 
     @FindBy(xpath = "//div[contains(@class, 'ComposeDoneScreen-Actions')]/descendant::a[text()='Вернуться во Входящие')]")
     private WebElement frustratingWindow;
 
-        @Step("Закрыть всплывающее окно")
-        public void clickFrustratingWindow(){
+    @Step("Закрыть всплывающее окно")
+    public void clickFrustratingWindow(){
 
-            logger.info("Закрыть всплывающее окно");
-            frustratingWindow.click();
+        logger.info("Закрыть всплывающее окно");
+        frustratingWindow.click();
 
-        }
+    }
 
     @FindBy(xpath = "//div[contains(@class, 'mail-MessageSnippet-Item mail-MessageSnippet-Item_firstline js-message-snippet-firstline)]")
     private WebElement recentTemplate;
 
-        @Step("Открыть созданный черновик")
-        public void clickRecentTemplate() {
+    @Step("Открыть созданный черновик")
+    public void clickRecentTemplate() {
 
-            logger.info("Открыть созданный черновик");
-            recentTemplate.click();
+        logger.info("Открыть созданный черновик");
+        recentTemplate.click();
+
+    }
+
+    @Step("Проверка корректности адресата")
+    public String getAdress() {
+
+        String adressName = null;
+
+        if (adressName.equals(adressField.getText())) {
+
+            logger.info("Адресат верен");
+            return adressField.getText();
+
+        } else {
+
+            logger.error("Адресат неверен" );
+            return adressName;
+        }
+
+    }
+
+    @Step("Проверка корректности темы черновика")
+    public String getSubject() {
+
+        String subjectText = null;
+
+        if (subjectText.equals(subjectName.getText())) {
+
+            logger.info("Тема письма верна");
+            return subjectName.getText();
+
+        } else {
+
+            logger.error("Тема письма не верна");
+            return subjectText;
+        }
+
+    }
+
+    @Step("Проверка корректности текста письма")
+    public  String getMailText() {
+
+        String mailWords = null;
+
+        if (mailWords.equals(mailText.getText())) {
+
+            logger.info("Текст письма верен");
+            return mailText.getText();
+
+        } else {
+
+            logger.error("Текст письма не верен");
+            return mailWords;
 
         }
 
-       @Step("Проверка корректности адресата")
-       public String getAdress() {
-
-            String adressName = null;
-
-             if (adressName.equals(adressField.getText())) {
-
-                 logger.info("Адресат верен");
-                 return adressField.getText();
-
-             } else {
-
-                 logger.error("Адресат неверен" );
-                 return adressName;
-             }
-
-       }
-
-       @Step("Проверка корректности темы черновика")
-       public String getSubject() {
-
-           String subjectText = null;
-
-            if (subjectText.equals(subjectName.getText())) {
-
-                logger.info("Тема письма верна");
-                return subjectName.getText();
-
-           } else {
-
-                logger.error("Тема письма не верна");
-                return subjectText;
-            }
-
-       }
-
-       @Step("Проверка корректности текста письма")
-       public  String getMailText() {
-
-            String mailWords = null;
-
-             if (mailWords.equals(mailText.getText())) {
-
-                 logger.info("Текст письма верен");
-                 return mailText.getText();
-
-             } else {
-
-                 logger.error("Текст письма не верен");
-                 return mailWords;
-
-             }
-
-       }
+    }
 
     @FindBy(xpath = "//a[text()=’Выйти из сервисов Яндекса’]")
     private WebElement logoutButtton;
 
-        @Step("Проверка имени пользователя")
-        public String getUserName() {
+    @Step("Проверка имени пользователя")
+    public String getUserName() {
 
-            logger.info("Чекаем юзернейм");
+        logger.info("Чекаем юзернейм");
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
@@ -186,26 +186,25 @@ public class UserPage {
 
         return userName;
 
-        }
+    }
 
-        @Step("Нажатие на меню входа-выхода")
-        public void entryMenu() {
+    @Step("Нажатие на меню входа-выхода")
+    public void entryMenu() {
 
-            logger.info("Нажимаем на меню входа-выхода");
+        logger.info("Нажимаем на меню входа-выхода");
 
         userMenu.click();
 
-        }
+    }
 
-        @Step("Выход")
-        public void userLogout() {
+    @Step("Выход")
+    public void userLogout() {
 
-            logger.info("Выход");
+        logger.info("Выход");
 
         logoutButtton.click();
 
-        }
-
     }
 
+}
 
