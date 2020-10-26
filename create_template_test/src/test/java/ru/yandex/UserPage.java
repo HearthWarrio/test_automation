@@ -3,6 +3,7 @@ package ru.yandex;
 import io.qameta.allure.Step;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,24 +28,27 @@ public class UserPage {
     @FindBy(xpath = "//a[text()='Черновики']")
     private WebElement addMail;
 
-    @Step("Переход в черновики")
-    public void makeMail() {
+        @Step("Переход в черновики")
+        public void makeMail () {
 
         logger.info("Переход в черновики");
         addMail.click();
-
+            Assert.assertEquals(driver.getTitle(), "Создать шаблон");
 
     }
+
 
     // сделать шаблон (октрыть окно)
     @FindBy(xpath = "//*[contains(@text 'Создать шаблон')]")
     private WebElement createTemplate;
 
     @Step("Открыть создание шаблона")
-    public void addTemplate(){
+    public void addTemplate() {
 
         logger.info("Откно формирования шаблона открыто");
         createTemplate.click();
+        WebElement a = driver.findElement(By.xpath("//[@class 'composeHeader-Title']"));
+        Assert.assertEquals(a.getClass(), "Создать шаблон");
 
     }
 
@@ -67,7 +71,7 @@ public class UserPage {
     public void inputSubject(String subject){
 
         subjectName.sendKeys(subject);
-        logger.info("Ввод темы");
+        logger.debug("Ввод темы");
 
     }
 
@@ -82,7 +86,7 @@ public class UserPage {
 
     }
 
-    @FindBy(xpath = "//button[contains(@class, 'control button2 button2_view_default button2_tone_default button2_size_l button2_theme_action button2_pin_circle-circle ComposeControlPanelButton-Button ComposeControlPanelButton-Button_action')]/descendant::span[text()='Отправить')]")
+    @FindBy(xpath = "//span[text()='Отправить']/parent::button")
     private WebElement sendMail;
 
     @Step("Нажать создания шаблона")
@@ -116,43 +120,43 @@ public class UserPage {
     }
 
     @Step("Проверка корректности адресата")
-    public String getAdress() {
+    public String isAdressCorrect() {
 
         String adressName = null;
 
         if (adressName.equals(adressField.getText())) {
 
-            logger.info("Адресат верен");
+            logger.info("Адресат" + adressName + "верен");
             return adressField.getText();
 
         } else {
 
-            logger.error("Адресат неверен" );
+            logger.error("Адресат" + adressName + "неверен" );
             return adressName;
         }
 
     }
 
     @Step("Проверка корректности темы черновика")
-    public String getSubject() {
+    public String isSubjectCorrect() {
 
         String subjectText = null;
 
         if (subjectText.equals(subjectName.getText())) {
 
-            logger.info("Тема письма верна");
+            logger.info("Тема  письма " + subjectName + "верна");
             return subjectName.getText();
 
         } else {
 
-            logger.error("Тема письма не верна");
+            logger.error("Тема письма" + subjectName + "не верна");
             return subjectText;
         }
 
     }
 
     @Step("Проверка корректности текста письма")
-    public  String getMailText() {
+    public  String isMailTextCorrect() {
 
         String mailWords = null;
 
@@ -174,13 +178,13 @@ public class UserPage {
     private WebElement logoutButtton;
 
     @Step("Проверка имени пользователя")
-    public String getUserName() {
+    public String istUserNameCorrect() {
 
         logger.info("Чекаем юзернейм");
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class 'yandex-header_content')]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class 'user-pic_image')]")));
 
         String userName = userMenu.getText();
 
@@ -207,4 +211,3 @@ public class UserPage {
     }
 
 }
-
