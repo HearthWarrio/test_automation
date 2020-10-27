@@ -1,6 +1,8 @@
 package ru.yandex;
 import org.junit.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -44,7 +46,7 @@ public class TestOne {
 
         loginPage.clickLoginButton();
 
-        String user = userPage.getUserName();
+        String user = userPage.istUserNameCorrect();
 
         Assert.assertEquals(ConfigureProperties.getProperty("login"), user);
 
@@ -59,6 +61,8 @@ public class TestOne {
     @Test
     public void test2() {
         userPage.addTemplate();
+        WebElement a = driver.findElement(By.xpath("//[@class 'composeHeader-Title']"));
+        Assert.assertEquals(a.getClass(), "Создать шаблон");
 
     }
 
@@ -101,6 +105,7 @@ public class TestOne {
     public void test8() {
 
         userPage.makeMail();
+        Assert.assertEquals(driver.getTitle(), "Создать шаблон");
 
     }
 
@@ -114,7 +119,7 @@ public class TestOne {
     @Test
     public void test10() {
 
-        String adress = userPage.getAdress();
+        String adress = userPage.isAdressCorrect();
 
         Assert.assertEquals(ConfigureProperties.getProperty("adress"), adress);
 
@@ -123,7 +128,7 @@ public class TestOne {
     @Test
     public void test11() {
 
-        String subject = userPage.getSubject();
+        String subject = userPage.isSubjectCorrect();
 
         Assert.assertEquals(ConfigureProperties.getProperty("subject"), subject);
 
@@ -132,7 +137,7 @@ public class TestOne {
     @Test
     public void test12() {
 
-        String text = userPage.getMailText();
+        String text = userPage.isMailTextCorrect();
 
         Assert.assertEquals(ConfigureProperties.getProperty("text"), text);
 
